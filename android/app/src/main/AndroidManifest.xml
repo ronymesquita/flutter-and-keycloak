@@ -6,7 +6,6 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="oauth2_test"
-
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"

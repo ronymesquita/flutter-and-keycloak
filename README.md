@@ -61,11 +61,11 @@ If is used an API server to provide data to the Flutter client, this server need
 
 The server should to be registered as a `Client`. The `Access Type` used in Keycloak  `Administration Console` needs to be `confidential`.
 
-![](./docs/oauth2_test/docs/server-configuration.png)
+![Server Configuration](https://github.com/ronymesquita/flutter-and-keycloak/raw/main/docs/server-configuration.png)
 
 For test, `Valid Redirect URIs` and `Web Origins` can use `*`, but can be better wo change it at production.
 
-![](/home/rony/flutter/oauth2_test/docs/server-configuration-2.png)
+![Server Configuration - 2](https://github.com/ronymesquita/flutter-and-keycloak/raw/main/docs/server-configuration-2.png)
 
 The server client and `secret` can be copied in the section `Credentials` after save.
 
@@ -77,15 +77,15 @@ In the example, the OAuth2 Proxy is `http://oauth2-proxy` because Docker is used
 
 To work properly, `Root URL`, `Valid Redirect URIs`,  and `Web Origins` needs to be configured.
 
-![](/home/rony/flutter/oauth2_test/docs/oauth2-proxy-configuration.png)
+![OAuth 2 Proxy Configuration](https://github.com/ronymesquita/flutter-and-keycloak/raw/main/docs/oauth2-proxy-configuration.png)
 
 In the `Mappers` section, is needed to create a `Mapper Type` "Group Membership" with `Token Claim Name` "groups".
 
 The complete configuration of OAuth2 Proxy with Keycloak can be found at [OAuth2 Provider Configuration](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider#keycloak-auth-provider)).
 
-![](/home/rony/flutter/oauth2_test/docs/oauth2-proxy-configuration-2.png)
+![OAuth 2 Proxy Configuration - 2](https://github.com/ronymesquita/flutter-and-keycloak/raw/main/docs/oauth2-proxy-configuration-2.png)
 
-![](/home/rony/flutter/oauth2_test/docs/oauth2-proxy-configuration-3.png)
+![OAuth 2 Proxy Configuration - 3](https://github.com/ronymesquita/flutter-and-keycloak/raw/main/docs/oauth2-proxy-configuration-3.png)
 
 ### Client Configuration
 
@@ -95,7 +95,7 @@ For test, `Valid Redirect URIs` and `Web Origins` can be configured with `*` to 
 
 In the section `OpenID Connect Compatibility Modes` can be enabled the use of refresh tokens.
 
-![](/home/rony/flutter/oauth2_test/docs/client-configuration.png)
+![Client Configuration](https://github.com/ronymesquita/flutter-and-keycloak/raw/main/docs/client-configuration.png)
 
 ## Token Validation in the API
 
@@ -293,3 +293,5 @@ await Navigator.push(
           );
         }));
 ```
+The working application can be see below:
+[Application Working](https://github.com/ronymesquita/flutter-and-keycloak/blob/main/docs/test.gif)

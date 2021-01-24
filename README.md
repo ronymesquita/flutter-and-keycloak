@@ -1,10 +1,10 @@
 # Flutter with Keycloak
 
-The key idea is connect Flutter on Android and iOS with [Keycloak](https://www.keycloak.org/).
+The key idea is authenticate with [Keycloak](https://www.keycloak.org/) using Flutter on Android and iOS.
 
 ## Keycloak Configuration
 
-Keycloak can be installed in different manner, the example below demonstrates the use with [Docker](https://www.docker.com/) for test.
+Keycloak can be installed in different manners, the example demonstrates the installation with [Docker](https://www.docker.com/). This is not production ready.
 
 To work properly, the authentication needs a server that makes the redirection. Here, [OAuth2 Proxy]([Menu](https://oauth2-proxy.github.io/oauth2-proxy/)) is used to do it.
 
@@ -73,7 +73,7 @@ The server client and `secret` can be copied in the section `Credentials` after 
 
 OAuth2 Proxy also is a `Client`, the `Access Type` also is `confidential`.
 
-In the example, the OAuth2 Proxy is `http://oauth2-proxy` because Docker is used. In production this may change.
+In the example, the OAuth2 Proxy is `http://oauth2-proxy` because Docker is used. In production the URL may change.
 
 To work properly, `Root URL`, `Valid Redirect URIs`,  and `Web Origins` needs to be configured.
 
@@ -81,7 +81,7 @@ To work properly, `Root URL`, `Valid Redirect URIs`,  and `Web Origins` needs to
 
 In the `Mappers` section, is needed to create a `Mapper Type` "Group Membership" with `Token Claim Name` "groups".
 
-The complete configuration of OAuth2 Proxy with Keycloak can be found at [OAuth2 Provider Configuration](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider#keycloak-auth-provider)).
+The complete configuration of OAuth2 Proxy with Keycloak can be found at [OAuth2 Provider Configuration](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider#keycloak-auth-provider).
 
 ![OAuth 2 Proxy Configuration - 2](https://github.com/ronymesquita/flutter-and-keycloak/raw/main/docs/oauth2-proxy-configuration-2.png)
 
@@ -91,7 +91,7 @@ The complete configuration of OAuth2 Proxy with Keycloak can be found at [OAuth2
 
 Flutter is also a `Client`, the `Access Type` is `confidential`.
 
-For test, `Valid Redirect URIs` and `Web Origins` can be configured with `*` to permit and URL. Can be more secure change it in production.
+For test, `Valid Redirect URIs` and `Web Origins` can be configured with `*` to permit and URL. Can be more secure change at production.
 
 In the section `OpenID Connect Compatibility Modes` can be enabled the use of refresh tokens.
 
@@ -99,11 +99,11 @@ In the section `OpenID Connect Compatibility Modes` can be enabled the use of re
 
 ## Token Validation in the API
 
-The example below shows ASP.NET Core configured to request to Keycloak validate the tokens. Othe languagues and frameworks can be used.
+The example below shows ASP.NET Core configured to request to Keycloak validate the tokens. Othe languagues and frameworks can also be used with Keycloak.
 
-The NuGet package required are  [Microsoft.AspNetCore.Authentication.JwtBearer](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer):
+The NuGet package required are [Microsoft.AspNetCore.Authentication.JwtBearer](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer).
 
-The code below needs to be put in `Startup.cs`:
+The code below needs to be put in the `Startup.cs` file:
 
 ```csharp
 using System;
@@ -169,8 +169,6 @@ namespace KeycloakTestApi
         }
     }
 }
-
-
 ```
 
 After configure the authentication, the `controllers` can use the `Authorize` attribute:
@@ -211,8 +209,6 @@ namespace KeycloakTestApi.Controllers
         }
     }
 }
-
-
 ```
 
 ## Flutter Client
@@ -239,7 +235,7 @@ void main() {
 
 In the `AndroidManifest.xml` file, is also needed to put `android:usesCleartextTraffic="true"` at `application` tag.
 
-The configuration `android:usesCleartextTraffic` is required to used and IP address without HTTPS. To use and domain like `site.com` without HTTPS, is required to use [network security configuration](https://developer.android.com/training/articles/security-config).
+> The configuration `android:usesCleartextTraffic` is required to used and IP address without HTTPS. To use an domain like `site.com` without HTTPS, is required to use [network security configuration](https://developer.android.com/training/articles/security-config).
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
@@ -251,7 +247,7 @@ The configuration `android:usesCleartextTraffic` is required to used and IP addr
 
 ```
 
-The iOS version can need to configure [App Transport Security](https://guides.codepath.com/ios/App-Transport-Security) (ATS). The use of IP address without domin has a similar limitation to that found on Android. To disable ATS, can be used the XML below at `Info.plist` file.
+The iOS version can need to configure [App Transport Security](https://guides.codepath.com/ios/App-Transport-Security) (ATS). The use of IP address without an domain has a similar limitation to that found on Android. To disable ATS, can be used the XML below at `Info.plist` file.
 
 ```xml
 <key>NSAppTransportSecurity</key>
@@ -260,7 +256,7 @@ The iOS version can need to configure [App Transport Security](https://guides.co
 </dict>
 ```
 
-The full example is at the `main.dart` file. The [Chopper](https://pub.dev/packages/chopper) package is not required to the OIDC authentication with Keycloak. 
+The most important part of the code is on the `main.dart` file. The [Chopper](https://pub.dev/packages/chopper) package is not required to the OIDC authentication with Keycloak. 
 
 To display the Keycloak's login page can be used `Navigator` as show below:
 
@@ -293,5 +289,5 @@ await Navigator.push(
           );
         }));
 ```
-The working application can be see below:
-[Application Working](https://github.com/ronymesquita/flutter-and-keycloak/blob/main/docs/test.gif)
+The working application can be see below:<br>
+<img src="https://github.com/ronymesquita/flutter-and-keycloak/raw/main/docs/test.gif" width="300">
